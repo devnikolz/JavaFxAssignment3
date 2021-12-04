@@ -95,11 +95,18 @@ public class RegistrationFormApplication extends Application {
                     showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter your email ID");
                     return;
                 }
-                if(passwordField.getText().isEmpty()) {
-                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter a password");
+
+                if(passwordField.getText().length() <= 7) {
+                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "The length of the password to be at least 7 characters in length.");
+                        return;
+                    }
+                if(!emailField.getText().matches("^[a-zA-Z][a-zA-Z0-9\\._-]{2,20}(@)(gmail.com|yahoo.com|icloud.com|hotmail.com|aol.com|msn.com)$")) {
+                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "We no longer support this email domain. Sorry for the inconvenience.");
+                        return;
+                    }
+                if(!passwordField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This password is not strong enough. Please make a better password.");
                     return;
-
-
                 }
 
                 showAlertMessage(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Complete!", "Welcome!!!");//nameField.getText());
