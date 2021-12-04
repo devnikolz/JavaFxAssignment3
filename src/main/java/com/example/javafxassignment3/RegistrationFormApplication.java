@@ -1,5 +1,5 @@
 package com.example.javafxassignment3;
-
+// import libraries for the form
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,88 +20,66 @@ public class RegistrationFormApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Registration Form JavaFX Application JDK 11.0.2");
 
-        // Create the registration form grid pane
-        GridPane gridPane = createRegistrationFormPane();
-        // Add UI controls to the registration form grid pane
-        addUIControls(gridPane);
-        // Create a scene with registration form grid pane as the root node
-        Scene scene = new Scene(gridPane, 800, 500);
-        // Set the scene in primary stage
-        primaryStage.setScene(scene);
 
+        GridPane GridPaneLayout = createRegistrationFormPane();
+        addUIControls(GridPaneLayout);
+        Scene scene = new Scene(GridPaneLayout, 750, 500);
+        GridPaneLayout.setStyle("-fx-background-color: GREY;");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
 
     private GridPane createRegistrationFormPane() {
-        // Instantiate a new Grid Pane
-        GridPane gridPane = new GridPane();
+        GridPane gridPaneLayout = new GridPane();
+        gridPaneLayout.setAlignment(Pos.CENTER);
+        gridPaneLayout.setPadding(new Insets(40, 40, 40, 40));
+        gridPaneLayout.setHgap(20);
+        gridPaneLayout.setVgap(20);
 
-        // Position the pane at the center of the screen, both vertically and horizontally
-        gridPane.setAlignment(Pos.CENTER);
-
-        // Set a padding of 20px on each side
-        gridPane.setPadding(new Insets(40, 40, 40, 40));
-
-        // Set the horizontal gap between columns
-        gridPane.setHgap(10);
-
-        // Set the vertical gap between rows
-        gridPane.setVgap(10);
-
-        // Add Column Constraints
-
-        // columnOneConstraints will be applied to all the nodes placed in column one.
         ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
         columnOneConstraints.setHalignment(HPos.RIGHT);
 
-        // columnTwoConstraints will be applied to all the nodes placed in column two.
         ColumnConstraints columnTwoConstrains = new ColumnConstraints(200,200, Double.MAX_VALUE);
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
-        gridPane.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
+        gridPaneLayout.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
 
-        return gridPane;
+        return gridPaneLayout;
     }
 
     private void addUIControls(GridPane gridPane) {
-        // Add Header
         Label headerLabel = new Label("Registration Form");
-        headerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        headerLabel.setFont(Font.font("Courier New ", FontWeight.BOLD, 24));
         gridPane.add(headerLabel, 0,0,2,1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
         GridPane.setMargin(headerLabel, new Insets(20, 0,20,0));
 
-        // Add Name Label
-        Label nameLabel = new Label("Full Name : ");
-        gridPane.add(nameLabel, 0,1);
 
-        // Add Name Text Field
-        TextField nameField = new TextField();
-        nameField.setPrefHeight(40);
-        gridPane.add(nameField, 1,1);
-
-
-        // Add Email Label
+        // Todo emailTest:
         Label emailLabel = new Label("Email ID : ");
         gridPane.add(emailLabel, 0, 2);
+        emailLabel.setFont(Font.font("Courier New ", 18));
+
 
         // Add Email Text Field
         TextField emailField = new TextField();
-        emailField.setPrefHeight(40);
+        emailField.setPrefHeight(50);
         gridPane.add(emailField, 1, 2);
 
-        // Add Password Label
+        // Todo passwordTest:
+        // Password Label
         Label passwordLabel = new Label("Password : ");
         gridPane.add(passwordLabel, 0, 3);
+        passwordLabel.setFont(Font.font("Courier New ", 18));
 
-        // Add Password Field
+        // Password Field
         PasswordField passwordField = new PasswordField();
-        passwordField.setPrefHeight(40);
+        passwordField.setPrefHeight(50);
         gridPane.add(passwordField, 1, 3);
 
-        // Add Submit Button
-        Button submitButton = new Button("Submit");
+        // Sign Up Button
+        Button submitButton = new Button("Sign Up");
         submitButton.setPrefHeight(40);
         submitButton.setDefaultButton(true);
         submitButton.setPrefWidth(100);
@@ -112,25 +90,25 @@ public class RegistrationFormApplication extends Application {
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(nameField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
-                    return;
-                }
+
                 if(emailField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your email id");
+                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter your email ID");
                     return;
                 }
                 if(passwordField.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter a password");
+                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter a password");
                     return;
                 }
 
-                showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Successful!", "Welcome " + nameField.getText());
+                showAlertMessage(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Complete!", "Welcome!!!");//nameField.getText());
             }
+
+
+
         });
     }
 
-    private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+    private void showAlertMessage(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -139,7 +117,11 @@ public class RegistrationFormApplication extends Application {
         alert.show();
     }
 
+
+
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }

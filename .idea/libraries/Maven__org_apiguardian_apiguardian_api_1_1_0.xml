@@ -2,7 +2,6 @@
   <library name="Maven: org.apiguardian:apiguardian-api:1.1.0">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/" />
-      <root url="file://$PROJECT_DIR$/../JavaCS3318/javafx-sdk-11.0.2/lib" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0-javadoc.jar!/" />
@@ -14,7 +13,6 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0-sources.jar!/" />
       <root url="file://$PROJECT_DIR$/../JavaCS3318/javafx-sdk-11.0.2/lib" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/../JavaCS3318/javafx-sdk-11.0.2/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../JavaCS3318/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
   </library>
 </component>
