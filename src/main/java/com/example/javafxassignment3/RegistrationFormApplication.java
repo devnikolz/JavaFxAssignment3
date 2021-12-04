@@ -98,6 +98,8 @@ public class RegistrationFormApplication extends Application {
                 if(passwordField.getText().isEmpty()) {
                     showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter a password");
                     return;
+
+
                 }
 
                 showAlertMessage(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Complete!", "Welcome!!!");//nameField.getText());
