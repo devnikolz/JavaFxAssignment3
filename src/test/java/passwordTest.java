@@ -17,7 +17,7 @@ public class passwordTest {
     @Test
     void toValidatePassword(){
 
-        String emailFormat = "genericPassword123!";
+        String emailFormat = "badpassword!";
         boolean isEmailCorrect = belowTest.test(emailFormat);
         Assertions.assertTrue(isEmailCorrect);
     }
