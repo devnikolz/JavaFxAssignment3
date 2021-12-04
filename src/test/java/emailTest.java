@@ -17,7 +17,7 @@ public class emailTest {
     @Test
     void toValidateEmail(){
 
-        String emailFormat = "genrericEmail@gmail.com";
+        String emailFormat = "genrericEmailcom";
         boolean isEmailCorrect = belowTest.test(emailFormat);
         Assertions.assertTrue(isEmailCorrect);
     }
