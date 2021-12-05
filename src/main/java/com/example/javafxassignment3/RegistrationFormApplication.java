@@ -16,6 +16,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.util.Objects;
+
 public class RegistrationFormApplication extends Application {
 
     @Override
@@ -121,12 +123,31 @@ public class RegistrationFormApplication extends Application {
                     return;
                 }
 
-                if (!passwordField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
-                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This password is not strong enough. Please make a better password.");
+                if (passwordField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+                  //  showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This password is not strong enough. Please make a better password.");
+
+                    if (Objects.equals(passwordField.getText(), passwordField2.getText())) {
+                        showAlertMessage2(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "No Match!", "This passwords match.");
+                    }
+
+                    else{ showAlertMessage2(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "NO Match!", "This passwords do not match.");
+                    }
                     return;
 
 
                 }
+
+//                if (passwordField2.getText().length() <= 7) {
+//                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "The length of the password to be at least 7 characters in length.");
+//                    return;
+//                }
+//
+//                if (!passwordField2.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+//                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This password is not strong enough. Please make a better password.");
+
+
+
+
 
 
                 showAlertMessage(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Complete!", "Welcome!!!");//nameField.getText());
@@ -137,6 +158,15 @@ public class RegistrationFormApplication extends Application {
     }
 
     private void showAlertMessage(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
+    }
+
+    private void showAlertMessage2(Alert.AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
