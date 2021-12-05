@@ -8,8 +8,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -25,7 +26,7 @@ public class RegistrationFormApplication extends Application {
         GridPane GridPaneLayout = createRegistrationFormPane();
         addUIControls(GridPaneLayout);
         Scene scene = new Scene(GridPaneLayout, 750, 500);
-        GridPaneLayout.setStyle("-fx-background-image: url('" +  image + "'); " +
+        GridPaneLayout.setStyle("-fx-background-image: url('" + image + "'); " +
                 "-fx-background-position: center center; " +
                 "-fx-background-repeat: stretch;");
         primaryStage.setScene(scene);
@@ -43,7 +44,7 @@ public class RegistrationFormApplication extends Application {
         ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
         columnOneConstraints.setHalignment(HPos.RIGHT);
 
-        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200,200, Double.MAX_VALUE);
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(200, 200, Double.MAX_VALUE);
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gridPaneLayout.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains);
@@ -54,9 +55,9 @@ public class RegistrationFormApplication extends Application {
     private void addUIControls(GridPane gridPane) {
         Label headerLabel = new Label("Registration Form");
         headerLabel.setFont(Font.font("Courier New ", FontWeight.BOLD, 24));
-        gridPane.add(headerLabel, 0,0,2,1);
+        gridPane.add(headerLabel, 0, 0, 2, 1);
         GridPane.setHalignment(headerLabel, HPos.CENTER);
-        GridPane.setMargin(headerLabel, new Insets(20, 0,20,0));
+        GridPane.setMargin(headerLabel, new Insets(20, 0, 20, 0));
 
 
         // Todo emailTest:
@@ -76,10 +77,12 @@ public class RegistrationFormApplication extends Application {
         gridPane.add(passwordLabel, 1, 4);
         passwordLabel.setFont(Font.font("Courier New ", 12));
 
+
         // Password Field
         PasswordField passwordField = new PasswordField();
         passwordField.setPrefHeight(30);
         gridPane.add(passwordField, 1, 5);
+
 
         Label passwordLabel2 = new Label("Confirm Password : ");
         gridPane.add(passwordLabel2, 1, 6);
@@ -96,51 +99,54 @@ public class RegistrationFormApplication extends Application {
         submitButton.setPrefWidth(100);
         gridPane.add(submitButton, 0, 8, 2, 1);
         GridPane.setHalignment(submitButton, HPos.CENTER);
-        GridPane.setMargin(submitButton, new Insets(20, 0,20,0));
+        GridPane.setMargin(submitButton, new Insets(20, 0, 20, 0));
 
 
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
-
-                if(emailField.getText().isEmpty()) {
+                if (emailField.getText().isEmpty()) {
                     showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter your email ID");
                     return;
                 }
 
-                if(passwordField.getText().length() <= 7) {
-                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "The length of the password to be at least 7 characters in length.");
-                        return;
-                    }
-                if(!emailField.getText().matches("^[a-zA-Z][a-zA-Z0-9\\._-]{2,20}(@)(gmail.com|yahoo.com|icloud.com|hotmail.com|aol.com|msn.com)$")) {
+                if (!emailField.getText().matches("^[a-zA-Z0-9][a-zA-Z0-9\\._-]{2,20}(@)(gmail.com|yahoo.com|icloud.com|hotmail.com|aol.com|msn.com)$")) {
                     showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "We no longer support this email domain. Sorry for the inconvenience.");
-                        return;
-                    }
-                if(!passwordField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+                    return;
+                }
+
+                if (passwordField.getText().length() <= 7) {
+                    showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "The length of the password to be at least 7 characters in length.");
+                    return;
+                }
+
+                if (!passwordField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
                     showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This password is not strong enough. Please make a better password.");
                     return;
+
+
                 }
 
 
                 showAlertMessage(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Complete!", "Welcome!!!");//nameField.getText());
             }
 
-            private void showAlertMessage(Alert.AlertType alertType, Window owner, String title, String message) {
-                Alert alert = new Alert(alertType);
-                alert.setTitle(title);
-                alert.setHeaderText(null);
-                alert.setContentText(message);
-                alert.initOwner(owner);
-                alert.show();
-            }
 
         });
+    }
+
+    private void showAlertMessage(Alert.AlertType alertType, Window owner, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.initOwner(owner);
+        alert.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }
