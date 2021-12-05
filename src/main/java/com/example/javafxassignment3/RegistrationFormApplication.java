@@ -126,6 +126,7 @@ public class RegistrationFormApplication extends Application {
                 if (passwordField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
                   //  showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "This password is not strong enough. Please make a better password.");
 
+                    // checks if passwords are the same
                     if (Objects.equals(passwordField.getText(), passwordField2.getText())) {
                         showAlertMessage2(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "No Match!", "This passwords match.");
                     }
