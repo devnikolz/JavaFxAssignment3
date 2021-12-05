@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -20,11 +21,13 @@ public class RegistrationFormApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Registration Form JavaFX Application JDK 11.0.2");
 
-
+        String image = String.valueOf(RegistrationFormApplication.class.getResource("/Users/projectbuild/Desktop/aws.png"));
         GridPane GridPaneLayout = createRegistrationFormPane();
         addUIControls(GridPaneLayout);
         Scene scene = new Scene(GridPaneLayout, 750, 500);
-        GridPaneLayout.setStyle("-fx-background-color: GREY;");
+        GridPaneLayout.setStyle("-fx-background-image: url('" +  image + "'); " +
+                "-fx-background-position: center center; " +
+                "-fx-background-repeat: stretch;");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -58,38 +61,48 @@ public class RegistrationFormApplication extends Application {
 
         // Todo emailTest:
         Label emailLabel = new Label("Email ID : ");
-        gridPane.add(emailLabel, 0, 2);
-        emailLabel.setFont(Font.font("Courier New ", 18));
+        gridPane.add(emailLabel, 1, 2);
+        emailLabel.setFont(Font.font("Courier New ", 12));
 
 
         // Add Email Text Field
         TextField emailField = new TextField();
-        emailField.setPrefHeight(50);
-        gridPane.add(emailField, 1, 2);
+        emailField.setPrefHeight(30);
+        gridPane.add(emailField, 1, 3);
 
         // Todo passwordTest:
         // Password Label
         Label passwordLabel = new Label("Password : ");
-        gridPane.add(passwordLabel, 0, 3);
-        passwordLabel.setFont(Font.font("Courier New ", 18));
+        gridPane.add(passwordLabel, 1, 4);
+        passwordLabel.setFont(Font.font("Courier New ", 12));
 
         // Password Field
         PasswordField passwordField = new PasswordField();
-        passwordField.setPrefHeight(50);
-        gridPane.add(passwordField, 1, 3);
+        passwordField.setPrefHeight(30);
+        gridPane.add(passwordField, 1, 5);
+
+        Label passwordLabel2 = new Label("Confirm Password : ");
+        gridPane.add(passwordLabel2, 1, 6);
+        passwordLabel2.setFont(Font.font("Courier New ", 12));
+
+        PasswordField passwordField2 = new PasswordField();
+        passwordField2.setPrefHeight(30);
+        gridPane.add(passwordField2, 1, 7);
 
         // Sign Up Button
         Button submitButton = new Button("Sign Up");
-        submitButton.setPrefHeight(40);
+        submitButton.setPrefHeight(30);
         submitButton.setDefaultButton(true);
         submitButton.setPrefWidth(100);
-        gridPane.add(submitButton, 0, 4, 2, 1);
+        gridPane.add(submitButton, 0, 8, 2, 1);
         GridPane.setHalignment(submitButton, HPos.CENTER);
         GridPane.setMargin(submitButton, new Insets(20, 0,20,0));
+
 
         submitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
 
                 if(emailField.getText().isEmpty()) {
                     showAlertMessage(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Error! Please re-enter your email ID");
@@ -109,9 +122,9 @@ public class RegistrationFormApplication extends Application {
                     return;
                 }
 
+
                 showAlertMessage(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Registration Complete!", "Welcome!!!");//nameField.getText());
             }
-
 
             private void showAlertMessage(Alert.AlertType alertType, Window owner, String title, String message) {
                 Alert alert = new Alert(alertType);
@@ -121,6 +134,7 @@ public class RegistrationFormApplication extends Application {
                 alert.initOwner(owner);
                 alert.show();
             }
+
         });
     }
 
